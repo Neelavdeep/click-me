@@ -35,6 +35,7 @@
 
     h1 {
       margin-bottom: 25px;
+      font-size: 26px;
     }
 
     .buttons {
@@ -42,13 +43,14 @@
       justify-content: center;
       gap: 20px;
       position: relative;
+      margin-top: 20px;
     }
 
     button {
-      padding: 12px 26px;
+      padding: 14px 30px;
       font-size: 18px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
     }
 
@@ -68,7 +70,6 @@
       top: -10px;
       width: 10px;
       height: 10px;
-      background-color: red;
       opacity: 0.8;
       animation: fall 2s linear forwards;
       z-index: 999;
@@ -84,6 +85,26 @@
       0% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
       100% { transform: translateY(0); }
+    }
+
+    /* 📱 MOBILE OPTIMIZATION */
+    @media (max-width: 600px) {
+      .card {
+        padding: 30px;
+      }
+
+      .date-img {
+        width: 260px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      button {
+        font-size: 22px;
+        padding: 18px 36px;
+      }
     }
   </style>
 </head>
@@ -135,7 +156,7 @@
     });
 
     function launchConfetti() {
-      for (let i = 0; i < 120; i++) {
+      for (let i = 0; i < 180; i++) {
         const confetti = document.createElement("div");
         confetti.classList.add("confetti");
         confetti.style.left = Math.random() * window.innerWidth + "px";
@@ -146,7 +167,7 @@
         confetti.style.animationDuration = 1 + Math.random() + "s";
         document.body.appendChild(confetti);
 
-        setTimeout(() => confetti.remove(), 1500);
+        setTimeout(() => confetti.remove(), 2000);
       }
     }
 
@@ -165,14 +186,15 @@
             font-family: Arial;
             text-align: center;
             color: white;
+            padding: 20px;
           ">
             <img src="dinner.png" style="
-              width: 220px;
+              width: 260px;
               border-radius: 20px;
               margin-bottom: 20px;
             " />
-            <h1>Yayyy!!! 💖🥰</h1>
-            <p style="font-size: 20px;">
+            <h1 style="font-size: 36px;">Yayyy!!! 💖🥰</h1>
+            <p style="font-size: 22px;">
               Please also text me a yes on WhatsApp so that I know you agreed 😀
             </p>
           </div>
