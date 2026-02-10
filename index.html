@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hey You 💖</title>
+
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      max-width: 90%;
+      z-index: 10;
+    }
+
+    .date-img {
+      width: 220px;
+      margin-bottom: 20px;
+      border-radius: 18px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    h1 {
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    button {
+      padding: 12px 26px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    #no {
+      background-color: #f44336;
+      color: white;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: -10px;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      opacity: 0.8;
+      animation: fall 2s linear forwards;
+      z-index: 999;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <img src="dinner.png" alt="Dinner date" class="date-img" />
+
+    <h1>Hey Pari! Can I take you out for dinner this Saturday? 💕</h1>
+
+    <div class="buttons">
+      <button id="yes" onclick="yesClicked()">Yes 😍</button>
+      <button id="no">No 🙃</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    let hasEscaped = false;
+
+    function moveNoButton() {
+      if (!hasEscaped) {
+        hasEscaped = true;
+        noBtn.style.position = "fixed";
+      }
+
+      const padding = 16;
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+
+      const maxX = window.innerWidth - btnWidth - padding;
+      const maxY = window.innerHeight - btnHeight - padding;
+
+      const x = Math.max(padding, Math.random() * maxX);
+      const y = Math.max(padding, Math.random() * maxY);
+
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    // Desktop
+    noBtn.addEventListener("mouseenter", moveNoButton);
+
+    // Mobile
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+
+    function launchConfetti() {
+      for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.backgroundColor =
+          ["#ff4d6d", "#ffafcc", "#ffd166", "#cdb4db"][
+            Math.floor(Math.random() * 4)
+          ];
+        confetti.style.animationDuration = 1 + Math.random() + "s";
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 1500);
+      }
+    }
+
+    function yesClicked() {
+      launchConfetti();
+
+      setTimeout(() => {
+        document.body.innerHTML = `
+          <div style="
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            font-family: Arial;
+            text-align: center;
+            color: white;
+          ">
+            <img src="dinner.png" style="
+              width: 220px;
+              border-radius: 20px;
+              margin-bottom: 20px;
+            " />
+            <h1>Yayyy!!! 💖🥰</h1>
+            <p style="font-size: 20px;">
+              Please also text me a yes on WhatsApp so that I know you agreed 😀
+            </p>
+          </div>
+        `;
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>
